@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title>Food Delivery App</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: "Montserrat", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            background-color: #572f29;
+            color: white;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .nav-info a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        .poster {
+            width: 80%;
+            height: 300px;
+            margin: 40px 0;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .poster-info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .expore {
+            width: 80%;
+            max-width: 1000px;
+            margin-bottom: 50px;
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #121212;
+        }
+
+        .expore h2 {
+            font-size: 28px;
+            color: #d57070;
+        }
+
+        .expore-items {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .food-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 130px;
+            padding: 10px;
+            background: white;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .food-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .food-item p {
+            margin-top: 10px;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .dishes {
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .dish {
+            width: 250px;
+            border: 1px solid #121212;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            overflow: hidden;
+            background: white;
+        }
+
+        .dish img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="nav-brand">
+            <img src="./assets/icons8-food-service-30.png" alt="Food Service">
+            <h3>FOOoOoDCaRt</h3>
+        </div>
+        <div class="nav-info">
+            <a href="#">Home</a>
+            <a href="#">Menu</a>
+            <a href="#">Contact us</a>
+        </div>
+    </div>
+
+    <div class="poster">
+        <img src="./assets/background.jpg" alt="Food Background">
+        <div class="poster-info">
+            <h2>Order Your Favorite Food Here</h2>
+            <p>Choose from a delectable array of dishes crafted with the finest ingredients.</p>
+        </div>
+    </div>
+
+    <div class="expore">
+        <h2>Explore Our Menu</h2>
+        <div class="expore-items"></div>
+    </div>
+
+    <div class="dishes-container">
+        <h2>Top Dishes Near You</h2>
+        <div class="dishes"></div>
+    </div>
+
+    <script>
+        const foodItems = [
+            { img: "./assets/salad.jpg", name: "Salad", handler: updateSalad },
+            { img: "./assets/chicken salad.jpg", name: "Rolls", handler: updateRolls },
+            { img: "./assets/veg salad.jpg", name: "Burger", handler: updateBurger },
+            { img: "./assets/green salad.jpg", name: "Pizza", handler: updatePizza }
+        ];
+
+        document.querySelector(".expore-items").innerHTML = foodItems
+            .map((item, index) => `
+                <div class="food-item" id="food-item-${index}" onclick="${item.handler.name}()">
+                    <img src="${item.img}" class="food-img" alt="${item.name}">
+                    <p>${item.name}</p>
+                </div>
+            `)
+            .join("");
+
+        function updateDishes(items) {
+            document.querySelector(".dishes").innerHTML = items
+                .map(item => `
+                    <div class="dish">
+                        <img src="${item.img}" alt="${item.name}">
+                        <h4>${item.name}</h4>
+                        <p>${item.desc}</p>
+                        <p>₹${item.price}</p>
+                    </div>
+                `)
+                .join("");
+        }
+
+        function updateSalad() {
+            const salads = [
+                { img: "./assets/green salad.png", name: "Greek Salad", desc: "Fresh and healthy", price: 120 },
+                { img: "./assets/veg salad.png", name: "Veg Salad", desc: "Loaded with greens", price: 180 }
+            ];
+            updateDishes(salads);
+        }
+
+        function updateRolls() {
+            const rolls = [
+                { img: "./assets/chicken_roll.jpg", name: "Chicken Roll", desc: "Spicy and tasty", price: 200 },
+                { img: "./assets/veg_roll.jpg", name: "Veg Roll", desc: "Filled with veggies", price: 150 }
+            ];
+            updateDishes(rolls);
+        }
+
+        function updateBurger() {
+            const burgers = [
+                { img: "./assets/burger.jpg", name: "Cheese Burger", desc: "Juicy and delicious", price: 250 }
+            ];
+            updateDishes(burgers);
+        }
+
+        function updatePizza() {
+            const pizzas = [
+                { img: "./assets/pizza.jpg", name: "Pepperoni Pizza", desc: "Crispy and cheesy", price: 300 }
+            ];
+            updateDishes(pizzas);
+        }
+    </script>
+</body>
+
+</html>
