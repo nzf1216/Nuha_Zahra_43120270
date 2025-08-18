@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> CSS Box Model Demonstration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+    .box-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      background-color: #0a3052; 
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40vw; 
+      height: 40vw;  
+      max-width: 300px;
+      max-height: 300px;
+      min-width: 150px;
+      min-height: 150px;
+      border: 5px solid rgb(26, 18, 4); 
+      padding: 30px; 
+      margin: 20px; 
+      box-sizing: content-box;
+      transition: all 0.2s ease;
+    }
+
+    
+    .controls {
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      background: #f0f0f0;
+      border-radius: 8px;
+    }
+
+    .control {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      margin: 0 10px;
+      accent-color: rgb(158, 149, 158);
+    }
+    .legend {
+      margin-top: 30px;
+      text-align: left;
+      display: inline-block;
+    }
+
+    .legend div {
+      margin: 8px 0;
+    }
+
+    .color-box {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      vertical-align: middle;
+      border: 1px solid #ccc;
+    }
+
+    .margin-color { background: transparent; }
+    .border-color { background: rgb(97, 64, 4); }
+    .padding-color { background: rgb(19, 16, 1); }
+    .content-color { background: #1c5174; }
+    @media (max-width: 500px) {
+      .box {
+        width: 60vw;
+        height: 60vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Box Model Demonstration</h1>
+
+  <div class="box-container">
+    <div class="box">Content</div>
+  </div>
+
+  <div class="controls">
+    <div class="control">
+      <label>Margin:</label>
+      <input type="range" id="marginSlider" min="0" max="100" value="20">
+      <span id="marginValue">20px</span>
+    </div>
+    <div class="control">
+      <label>Border:</label>
+      <input type="range" id="borderSlider" min="0" max="30" value="5">
+      <span id="borderValue">5px</span>
+    </div>
+    <div class="control">
+      <label>Padding:</label>
+      <input type="range" id="paddingSlider" min="0" max="100" value="30">
+      <span id="paddingValue">30px</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <h3>Box Model Components</h3>
+    <div><span class="color-box margin-color"></span><b>Margin</b> - Space outside the border (transparent)</div>
+    <div><span class="color-box border-color"></span><b>Border</b> - Surrounds the padding and content</div>
+    <div><span class="color-box padding-color"></span><b>Padding</b> - Space between border and content</div>
+    <div><span class="color-box content-color"></span><b>Content</b> - Actual content of the box</div>
+  </div>
+
+  <script>
+    const box = document.querySelector('.box');
+
+    const marginSlider = document.getElementById('marginSlider');
+    const borderSlider = document.getElementById('borderSlider');
+    const paddingSlider = document.getElementById('paddingSlider');
+
+    const marginValue = document.getElementById('marginValue');
+    const borderValue = document.getElementById('borderValue');
+    const paddingValue = document.getElementById('paddingValue');
+    function updateBoxModel() {
+      box.style.margin = marginSlider.value + "px";
+      box.style.borderWidth = borderSlider.value + "px";
+      box.style.padding = paddingSlider.value + "px";
+
+      marginValue.textContent = marginSlider.value + "px";
+      borderValue.textContent = borderSlider.value + "px";
+      paddingValue.textContent = paddingSlider.value + "px";
+    }
+    marginSlider.addEventListener("input", updateBoxModel);
+    borderSlider.addEventListener("input", updateBoxModel);
+    paddingSlider.addEventListener("input", updateBoxModel);
+  </script>
+</body>
+</html>
