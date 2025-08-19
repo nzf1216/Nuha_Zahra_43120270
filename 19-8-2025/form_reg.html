@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration (No Bootstrap)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #76684c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: rgb(82, 61, 14);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px gray;
+      width: 350px;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: rgb(10, 58, 58);
+      color: rgb(185, 174, 174);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .success {
+      color: green;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Student Registration</h2>
+    <form onsubmit="register(event)">
+      <label>Name</label>
+      <input type="text" id="name" required>
+      
+      <label>Email</label>
+      <input type="email" id="email" required>
+      
+      <label>Course</label>
+      <select id="course">
+        <option>IT</option>
+        <option>CSE</option>
+        <option>ECE</option>
+        <option>EEE</option>
+      </select>
+      
+      <button type="submit">Register</button>
+    </form>
+    <p class="success" id="msg"></p>
+  </div>
+
+  <script>
+    function register(event) {
+      event.preventDefault();
+      let name = document.getElementById("name").value;
+      document.getElementById("msg").innerText = 
+        "🎉 " + name + " registered successfully!";
+    }
+  </script>
+</body>
+</html>
