@@ -1,0 +1,23 @@
+show databases; 
+use sathyabama;
+create table ECE( name varchar(20), age int, skill varchar(20));
+create table CSE( name varchar(20), age int, skill varchar(20));
+INSERT INTO ECE values('benny',20,'python');
+drop table ece;
+drop table cse;
+INSERT INTO ECE values('zahra',20,'python');
+INSERT INTO CSE values('vaishali',20,'java');
+INSERT INTO CSE values('nikitha',20,'html');
+select*from CSE;
+ALTER TABLE ece ADD COLUMN sid INT;
+ALTER TABLE ece ADD COLUMN marks INT;
+ALTER TABLE cse ADD COLUMN sid INT;
+select*from ece;
+select*from CSE;
+ALTER TABLE ece
+ADD COLUMN scountry VARCHAR(40) DEFAULT 'India';
+select*from ece;
+UPDATE ece SET scountry = 'uk' WHERE name = 'zahra';
+SELECT * FROM ECE;
+update ece set age=age+1;
+  
