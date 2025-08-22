@@ -1,0 +1,11 @@
+show databases; 
+use sathyabama;
+create table ECE( name varchar(20), age int, skill varchar(20));
+create table CSE( name varchar(20), age int, skill varchar(20));
+INSERT INTO ECE values('benny',20,'python');
+drop table ece;
+drop table cse;
+INSERT INTO ECE values('zahra',20,'python');
+INSERT INTO CSE values('vaishali',20,'java');
+INSERT INTO CSE values('nikitha',20,'html');
+select*from CSE;
