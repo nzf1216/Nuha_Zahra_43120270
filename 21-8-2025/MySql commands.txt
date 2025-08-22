@@ -9,3 +9,5 @@ INSERT INTO ECE values('zahra',20,'python');
 INSERT INTO CSE values('vaishali',20,'java');
 INSERT INTO CSE values('nikitha',20,'html');
 select*from CSE;
+alter table ECE add coloumn sid int ;
+alter table CSE add coloumn sid int ;
