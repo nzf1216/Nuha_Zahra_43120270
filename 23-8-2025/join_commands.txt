@@ -1,0 +1,31 @@
+show databases;
+create database college;
+use college;
+create table datas(
+name varchar(20) not null,
+regno int primary key,
+age int check(age>15),
+email varchar(30) unique
+);
+insert into datas values('Vaishali', 101, 20, 'vaishali@gmail.com');
+insert into datas values('Sangeetha', 102, 22, 'sangeetha@gmail.com');
+insert into datas values('Swetha', 103, 19, 'swetha@gmail.com');
+insert into datas values('Nikitha', 104, 21, 'nikitha@gmail.com');
+insert into datas values('Zahra', 105, 23, 'zahra@gmail.com');
+select * from datas;
+drop table datas;
+alter table datas drop index email;
+create table courses (
+    courseId int primary key,
+    regno int,
+    courseName varchar(50),
+    foreign key (regno) references datas(regno)
+);
+insert into courses values (1, 101, 'mathematics');
+insert into courses values (2, 102, 'physics');
+insert into courses values (3, 103, 'chemistry');
+insert into courses values (4, 104, 'biology');
+insert into courses values (5, 105, 'english');
+select * from courses;
+drop table courses;
+select d.name, d.regno, c.courseName from datas d join courses c on d.regno = c.regno;
