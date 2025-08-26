@@ -1,0 +1,32 @@
+show databases;
+create database sathyabama;
+use sathyabama;
+create table CSE(regno int,name varchar(20),dept varchar(10));
+create table ECE(regno int,name varchar(20),dept varchar(10));
+
+insert into CSE values(001,'vaishali','CSE');
+insert into CSE values(002,'sangeetha','CSE');
+insert into CSE values(003,'swetha','CSE');
+insert into ECE values(001,'nikitha','ECE');
+insert into ECE values(002,'zahra','ECE');
+insert into ECE values(003,'priya','ECE');
+
+select * from CSE;
+select * from ECE;
+
+alter table CSE add column marks int;
+
+update CSE set marks = 99 where dept = 'CSE';
+
+truncate table ece;
+
+drop table ece;
+
+DELETE FROM CSE WHERE regno = 002;
+
+START TRANSACTION;
+INSERT INTO CSE VALUES (004,'fathima','CSE',95);
+SAVEPOINT sp1;
+INSERT INTO CSE VALUES (005,'fiona','CSE',90);
+ROLLBACK TO sp1;
+COMMIT;
