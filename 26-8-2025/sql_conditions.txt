@@ -1,0 +1,50 @@
+select*from worker where department='admin' and salary>=200000;-- Example 1: Employees in Admin department AND salary more than 200000
+SELECT * FROM worker 
+WHERE department = 'admin' AND salary >= 200000;
+SELECT * FROM CSE WHERE age > 30 AND skill = 'Java';
+SELECT * FROM worker WHERE department = 'admin' OR salary >= 200000;
+SELECT * FROM CSE WHERE skill = 'Python' OR skill = 'HTML';
+SELECT * FROM worker WHERE NOT department = 'admin';
+SELECT * FROM CSE WHERE NOT skill = 'Java';
+SELECT * FROM worker WHERE department = 'HR';
+SELECT * FROM CSE WHERE skill = 'HTML';
+SELECT * FROM worker WHERE job_title != 'Manager';
+SELECT * FROM ECE WHERE scountry <> 'India';
+SELECT * FROM worker WHERE experience > 5;
+SELECT * FROM CSE WHERE sid > 101;
+SELECT * FROM worker WHERE salary < 50000;
+SELECT * FROM ECE WHERE marks < 40;
+SELECT * FROM worker WHERE bonus >= 10000;
+SELECT * FROM CSE WHERE age >= 20;
+SELECT * FROM worker WHERE work_hours <= 40;
+SELECT * FROM ECE WHERE sid <= 10;
+SELECT * FROM CSE WHERE skill = 'Java';
+SELECT * FROM worker WHERE department = 'admin';
+SELECT * FROM CSE WHERE skill != 'Java';
+SELECT * FROM worker WHERE department <> 'admin';
+CREATE TABLE worker (wid INT PRIMARY KEY,name VARCHAR(30),age INT,department VARCHAR(20),salary INT);
+INSERT INTO worker (wid, name, age, department, salary) VALUES(1, 'Arun', 28, 'admin', 250000),(2, 'Meera', 32, 'HR', 180000),(3, 'Rahul', 26, 'IT', 220000),(4, 'Zahra', 30, 'admin', 210000),(5, 'Karan', 35, 'Finance', 270000);
+CREATE TABLE office (oid INT PRIMARY KEY,location VARCHAR(30),capacity INT,manager VARCHAR(30));
+INSERT INTO office (oid, location, capacity, manager) VALUES
+(101, 'Chennai', 200, 'Anitha'),(102, 'Bangalore', 150, 'Ravi'),(103, 'Hyderabad', 300, 'Sunil'),(104, 'Delhi', 250, 'Meera'),(105, 'Mumbai', 180, 'Karan');
+SELECT * FROM worker;
+SELECT * FROM office;
+SELECT * FROM worker WHERE department IN (SELECT manager FROM office);
+SELECT * FROM worker WHERE name NOT IN (SELECT manager FROM office);
+SELECT * FROM office WHERE manager IN (SELECT name FROM worker WHERE department = 'admin');
+SELECT * FROM worker WHERE name NOT IN (SELECT manager FROM office WHERE capacity > 200);
+SELECT * FROM worker WHERE salary BETWEEN 200000 AND 250000;
+SELECT * FROM office WHERE capacity BETWEEN 150 AND 250;
+SELECT * FROM worker WHERE salary NOT BETWEEN 200000 AND 250000;
+SELECT * FROM office WHERE capacity NOT BETWEEN 150 AND 250;
+INSERT INTO worker (wid, name, age, department, salary) VALUES(1, 'Arun', 28, 'admin', 250000),(2, 'Meera', 32, 'HR', 180000),(3, 'Rahul', 26, 'IT', 220000),(4, 'Zahra', 30, 'admin', 210000),(5, 'Karan', 35, 'Finance', 270000);
+SELECT * FROM worker WHERE department NOT IN ('HR', 'admin')AND salary BETWEEN 70000 AND 300000;
+SELECT * FROM worker WHERE name LIKE 'V%' AND salary >= 200000;
+SELECT *FROM worker WHERE department NOT IN ('Admin')AND salary < 100000;
+SELECT COUNT(*) FROM worker;
+SELECT AVG(salary) FROM worker;
+SELECT SUM(salary) FROM worker;
+SELECT MIN(salary) FROM worker;
+SELECT MAX(salary) FROM worker;
+SELECT name, salary, CASE WHEN salary < 25000 THEN 'Low' WHEN salary BETWEEN 25000 AND 50000 THEN 'Medium' ELSE 'High' END AS Salary_Level FROM worker;
+
