@@ -2,3 +2,5 @@ SELECT * FROM worker ORDER BY department ASC, age ASC;
 SELECT department, AVG(salary) AS avg_salary FROM worker GROUP BY department;SELECT COUNT(*) AS num_employees;
 SELECT department, MAX(salary) AS max_salary from worker group by department;
 SELECT * FROM worker ORDER BY salary DESC LIMIT 2 OFFSET 1;
+SELECT name, LOWER(name) AS name_lower FROM worker;
+
