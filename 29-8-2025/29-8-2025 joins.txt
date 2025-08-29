@@ -1,0 +1,23 @@
+SELECT w.name, w.department, o.location, o.manager
+FROM worker w
+INNER JOIN office o ON w.name = o.manager;
+
+SELECT e.name AS ece_name, c.name AS cse_name, e.age
+FROM ECE e
+INNER JOIN CSE c ON e.age = c.age;
+
+SELECT w.name, w.department, o.location
+FROM worker w
+RIGHT JOIN office o ON w.name = o.manager;
+
+SELECT e.name AS ece_name, e.skill, c.name AS cse_name, c.skill
+FROM ECE e
+LEFT JOIN CSE c ON e.skill = c.skill
+UNION
+SELECT e.name AS ece_name, e.skill, c.name AS cse_name, c.skill
+FROM ECE e
+RIGHT JOIN CSE c ON e.skill = c.skill;
+
+SELECT e.name AS ece_name, c.name AS cse_name
+FROM ECE e
+CROSS JOIN CSE c;
