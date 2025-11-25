@@ -1,0 +1,107 @@
+package practice;
+
+public class Testing {
+
+    public static void printArray(int[] arr) {
+        System.out.print("Array: ");
+        for (int a : arr) System.out.print(a + " ");
+        System.out.println();
+    }
+
+
+    public static int findMax(int[] arr) {
+        int max = arr[0];
+        for (int a : arr) if (a > max) max = a;
+        return max;
+    }
+
+   
+    public static int findMin(int[] arr) {
+        int min = arr[0];
+        for (int a : arr) if (a < min) min = a;
+        return min;
+    }
+
+  
+    public static int sumArray(int[] arr) {
+        int sum = 0;
+        for (int a : arr) sum += a;
+        return sum;
+    }
+
+    public static double averageArray(int[] arr) {
+        return (double) sumArray(arr) / arr.length;
+    }
+
+    public static boolean search(int[] arr, int key) {
+        for (int a : arr) if (a == key) return true;
+        return false;
+    }
+
+    public static void reverseArray(int[] arr) {
+        int i = 0, j = arr.length - 1;
+        while (i < j) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++; j--;
+        }
+    }
+    public static int[] copyArray(int[] arr) {
+        int[] copy = new int[arr.length];
+        for (int i = 0; i < arr.length; i++)
+            copy[i] = arr[i];
+        return copy;
+    }
+
+    public static void sortArray(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+    public static int[] mergeArrays(int[] a, int[] b) {
+        int[] merged = new int[a.length + b.length];
+        int k = 0;
+
+        for (int x : a) merged[k++] = x;
+        for (int x : b) merged[k++] = x;
+
+        return merged;
+    }
+
+    public static void main(String[] args) {
+
+        int[] arr = {5, 2, 9, 1, 7};
+        int[] arr2 = {10, 20};
+
+        printArray(arr);
+
+        System.out.println("Max: " + findMax(arr));
+        System.out.println("Min: " + findMin(arr));
+        System.out.println("Sum: " + sumArray(arr));
+        System.out.println("Average: " + averageArray(arr));
+        System.out.println("Is 9 present? " + search(arr, 9));
+
+        reverseArray(arr);
+        System.out.print("Reversed: ");
+        printArray(arr);
+
+        int[] copy = copyArray(arr);
+        System.out.print("Copied: ");
+        printArray(copy);
+
+        sortArray(arr);
+        System.out.print("Sorted: ");
+        printArray(arr);
+
+        int[] merged = mergeArrays(arr, arr2);
+        System.out.print("Merged Array: ");
+        printArray(merged);
+    }
+}
