@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- FIXES SYMBOL ISSUES -->
+    <title>Orders & Invoice</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 70%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-card {
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-info p {
+            margin: 6px 0;
+            font-weight: 500;
+        }
+
+        .order-actions button {
+            display: block;
+            margin-bottom: 8px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #198754;
+            color: white;
+            cursor: pointer;
+            width: 140px;
+        }
+
+        .order-actions button:hover {
+            background: #157347;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🧾 Orders & Invoice</h2>
+
+    <div id="ordersContainer"></div>
+</div>
+
+<script>
+    fetch("http://localhost:8080/api/orders")
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("ordersContainer");
+            container.innerHTML = "";
+
+            if (data.length === 0) {
+                container.innerHTML = "<p>No orders found.</p>";
+                return;
+            }
+
+            data.forEach(order => {
+                const div = document.createElement("div");
+                div.className = "order-card";
+
+                div.innerHTML = `
+                    <div class="order-info">
+                        <p><strong>Customer:</strong> ${order.customerName}</p>
+                        <p><strong>Items:</strong> ${order.itemName} × ${order.quantity}</p>
+                        <p><strong>Total:</strong> ₹${order.price * order.quantity}</p>
+                        <p><strong>Status:</strong> ${order.status ?? "Placed"}</p>
+                    </div>
+
+                    <div class="order-actions">
+                        <button onclick="updateStatus(${order.id}, 'Preparing')">Preparing</button>
+                        <button onclick="updateStatus(${order.id}, 'Served')">Served</button>
+                        <button onclick="printInvoice(${order.id})">Print Invoice</button>
+                    </div>
+                `;
+
+                container.appendChild(div);
+            });
+        });
+
+    function updateStatus(id, status) {
+        alert("Order " + id + " marked as " + status);
+        // Later we can connect this to backend PUT API
+    }
+
+    function printInvoice(id) {
+        alert("Invoice printed for Order " + id);
+        // Later we can generate PDF
+    }
+</script>
+
+</body>
+</html>
