@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<div class="navbar">
+    <h2>Restaurant</h2>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="orders.html">Orders</a></li>
+    </ul>
+</div>
+
+<!-- ================= MAIN CONTAINER ================= -->
+<div class="container">
+
+    <!-- ================= ADD MENU ITEM ================= -->
+    <div class="card">
+        <h2>🍽️ Add Menu Item</h2>
+
+        <input type="text" id="name" placeholder="Item Name">
+        <input type="text" id="category" placeholder="Category">
+        <input type="number" id="price" placeholder="Price">
+
+        <button onclick="addItem()">Add Item</button>
+    </div>
+
+    <!-- ================= MENU LIST ================= -->
+    <div class="card">
+        <h2>📋 Menu Items</h2>
+        <div id="menuList"></div>
+    </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+    const API_URL = "http://localhost:8080/api/menu";
+
+    // Load items on page load
+    window.onload = loadMenu;
+
+    function loadMenu() {
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => {
+                const menuList = document.getElementById("menuList");
+                menuList.innerHTML = "";
+
+                data.forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "menu-item";
+
+                    div.innerHTML = `
+                        <div>
+                            <b>${item.name}</b><br>
+                            <small>${item.category}</small>
+                        </div>
+                        <div>
+                            <span class="price">₹${item.price}</span>
+                            <button class="delete-btn" onclick="deleteItem(${item.id})">Delete</button>
+                        </div>
+                    `;
+
+                    menuList.appendChild(div);
+                });
+            });
+    }
+
+    function addItem() {
+        const name = document.getElementById("name").value;
+        const category = document.getElementById("category").value;
+        const price = document.getElementById("price").value;
+
+        if (!name || !category || !price) {
+            alert("Please fill all fields");
+            return;
+        }
+
+        fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                category: category,
+                price: price
+            })
+        })
+        .then(() => {
+            document.getElementById("name").value = "";
+            document.getElementById("category").value = "";
+            document.getElementById("price").value = "";
+            loadMenu();
+        });
+    }
+
+    function deleteItem(id) {
+        fetch(`${API_URL}/${id}`, {
+            method: "DELETE"
+        })
+        .then(() => loadMenu());
+    }
+</script>
+
+</body>
+</html>
